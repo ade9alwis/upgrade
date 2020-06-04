@@ -1,0 +1,68 @@
+yum install -y epel-release.noarch
+
+
+
+yum makecache fast
+
+
+yum install -y yum-utils rpmconf
+
+
+rpmconf -a
+
+
+package-cleanup --leaves
+
+
+package-cleanup --orphans
+
+sleep 4; echo "part 1 i over"
+  
+yum remove -y bind-libs-*
+yum remove -y libsysfs-*
+yum remove -y kernel-*
+
+yum install -y dnf
+
+
+dnf remove -y yum yum-metadata-parser
+
+rm -Rf /etc/yum
+
+dnf makecache
+
+dnf upgrade -y
+
+sleep 4; echo "part 1 i over"
+
+#install the upgrade
+
+dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-release-8.1-1.1911.0.9.el8.x86_64.rpm
+
+#install the gpg-keys
+
+dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-gpg-keys-8.1-1.1911.0.9.el8.noarch.rpm
+
+#install epel for Centos 8
+
+dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-repos-8.1-1.1911.0.9.el8.x86_64.rpm 
+
+#dnf -y upgrade https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+dnf upgrade -y epel-release
+
+dnf makecache
+
+rpm -e `rpm -q kernel`
+
+
+rpm -e --nodeps sysvinit-tools
+
+dnf -y --releasever=8 --allowerasing --setopt=deltarpm=false distro-sync
+
+dnf install -y kernel-core
+
+
+dnf -y groupupdate "Core" "Minimal Install"
+
+
+
