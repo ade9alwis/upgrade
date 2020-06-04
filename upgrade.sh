@@ -1,32 +1,5 @@
 #!/bin/bash
 
-mkdir /Upgrade_Logs
-
-# redirect stdout/stderr to a file
-log = /Upgrade_Logs/upgrade.log
-
-echo "$(date)"
-
-#declase variable for input
-
-declare char 
-char=a 
-
-echo "This script will update Centos 7 to Centos 8. This script has not guarentees of any kind and you use it at your own risk."
-
-echo "Do you want to continue with the upgrade?"
-
-#Get a response from user
-
-read a;
-
-	if [ $a == y ]
-	 then
-	  continue
-	else 
-	   exit
-	fi
-
 #Disable SELinux until reboot
 setenforce 0
 
@@ -35,12 +8,24 @@ yum install epel-release -y
 yum install yum-utils -y 
 yum install rpmconf -y 
 rpmconf -a 
+yum makecache fast
 
 #Show programs unaffected by upgrade
-package-cleanup --leaves >/Upgrade_Logs/unaffected programs.txt 
+package-cleanup --leaves 
 
 #Show orphaned packages that neeed attention
-package-cleanup --orphans > /Upgrade_Logs/orphaned packages.txt 
+package-cleanup --orphans 
+
+#Remove these packages
+#yum remove -y bind-libs-lite-9.11.4-9.P2.el7.x86_64 
+yum remove -y bind-libs-lite-*
+
+#yum remove -y libsysfs-2.1.0-16.el7.x86_64  
+yum remove -y libsysfs-*
+
+#yum remove -y kernel-3.10.0-957.el7.x86_64
+ yum remove -y kernel-3.*
+ dnf makecache
 
 #Install Centos 8 installer program dnf
 yum -y install dnf 
@@ -57,7 +42,8 @@ dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Package
 #install epel for Centos 8
 dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-repos-8.1-1.1911.0.9.el8.x86_64.rpm 
 
-dnf -y upgrade https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+#dnf -y upgrade https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+dnf upgrade -y epel-release
 
 dnf clean all 
 
@@ -109,6 +95,3 @@ echo "The script finished successfully. Please see unaffteced programs.txt and o
 
 touch /.autorelabel
 
-read -p "Press [Enter] key to reboot"
-
-systemctl reboot
