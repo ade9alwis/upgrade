@@ -38,6 +38,8 @@ rm -Rf /etc/yum
 #install the upgrade
 dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-release-8.1-1.1911.0.9.el8.x86_64.rpm
 
+#install the gpg-keys
+dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-gpg-keys-8.1-1.1911.0.9.el8.noarch.rpm
 
 #install epel for Centos 8
 dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-repos-8.1-1.1911.0.9.el8.x86_64.rpm 
