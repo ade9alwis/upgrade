@@ -36,13 +36,14 @@ dnf -y remove yum yum-metadata-parser
 rm -Rf /etc/yum 
 
 #install the upgrade
-dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-release-8.1-1.1911.0.9.el8.x86_64.rpm
-
+#dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-release-8.1-1.1911.0.9.el8.x86_64.rpm
 #install the gpg-keys
-dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-gpg-keys-8.1-1.1911.0.9.el8.noarch.rpm
+#dnf -y upgrade http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-gpg-keys-8.1-1.1911.0.9.el8.noarch.rpm
 
 #install epel for Centos 8
-dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-repos-8.1-1.1911.0.9.el8.x86_64.rpm 
+#dnf -y install http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/centos-repos-8.1-1.1911.0.9.el8.x86_64.rpm 
+
+dnf install http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/{centos-release-8.1-1.1911.0.8.el8.x86_64.rpm,centos-gpg-keys-8.1-1.1911.0.8.el8.noarch.rpm,centos-repos-8.1-1.1911.0.8.el8.x86_64.rpm}
 
 #dnf -y upgrade https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
 dnf upgrade -y epel-release
