@@ -93,7 +93,7 @@ dnf config-manager --set-enabled extras-source
 
 dnf config-manager --set-enabled centosplus-source
 
-dnf -y update --best --allowerasing --distro-sync
+dnf -y update 
 
 echo "The script finished successfully. Please see unaffteced programs.txt and orphaned programs.txt in Upgrade_Log on the root (/) of the drive. You may need to update, remove and reinstall the orphaned packages to the correct version."
 
