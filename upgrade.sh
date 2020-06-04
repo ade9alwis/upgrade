@@ -67,7 +67,7 @@ dnf -y install gcc --best  --allowerasing --distro-sync
 
 dnf -y install annobin --best --allowerasing --distro-sync
 
-dnf -y install 'dnf-command(config-manager)'
+dnf -y install yum-config-manager 
 
 dnf config-manager --set-enabled AppStream
 
