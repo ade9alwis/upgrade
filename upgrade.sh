@@ -56,19 +56,20 @@ rpm -e --nodeps sysvinit-tools
 
 dnf -y --releasever=8 --allowerasing --setopt=deltarpm=false distro-sync 
 
-dnf -y install kernel-core --best --allowerasing --distro-sync
 
-dnf -y groupupdate "Core" "Minimal Install" --best --allowerasing --distro-sync 
+dnf -y install kernel-core 
 
-dnf -y install kernel --best --allowerasing --distro-sync
+dnf -y groupupdate "Core" "Minimal Install"
+
+dnf -y install kernel
 
 cat /etc/redhat-release 
 
-dnf -y install gcc --best  --allowerasing --distro-sync
+dnf -y install gcc 
 
-dnf -y install annobin --best --allowerasing --distro-sync
+dnf -y install annobin
 
-dnf -y install yum-config-manager 
+yum install 'dnf-command(config-manager)'
 
 dnf config-manager --set-enabled AppStream
 
